@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#020512">
+
+<title>C9 UZAIR | Cyber Portal</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    background:#020512;
+    color:#fff;
+    font-family:Inter,Arial,sans-serif;
+}
+
+/* =====================================================
+   LIGHTWEIGHT BACKGROUND
+===================================================== */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    overflow:hidden;
+    background:
+        radial-gradient(circle at 12% 8%,rgba(0,238,255,.12),transparent 26%),
+        radial-gradient(circle at 88% 22%,rgba(126,54,255,.12),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(255,30,190,.08),transparent 30%),
+        #020512;
+}
+
+/* Static grid = MUCH smoother */
+
+.grid{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(rgba(0,238,255,.045) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(0,238,255,.045) 1px,transparent 1px);
+    background-size:42px 42px;
+    opacity:.28;
+}
+
+/*
+   Instead of 3 huge animated blurred elements,
+   use lightweight fixed gradients.
+*/
+
+.glow{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+}
+
+.glow1{
+    width:280px;
+    height:280px;
+    left:-160px;
+    top:8%;
+    background:rgba(0,238,255,.10);
+}
+
+.glow2{
+    width:300px;
+    height:300px;
+    right:-170px;
+    top:38%;
+    background:rgba(116,60,255,.10);
+}
+
+.glow3{
+    width:260px;
+    height:260px;
+    left:28%;
+    bottom:-150px;
+    background:rgba(255,37,200,.07);
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:76px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 5%;
+
+    /*
+      Removed backdrop-filter.
+      This is one of the biggest mobile performance wins.
+    */
+
+    background:rgba(2,6,24,.96);
+
+    border-bottom:1px solid rgba(0,239,255,.28);
+
+    box-shadow:0 8px 28px rgba(0,0,0,.32);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.logo{
+    width:48px;
+    height:48px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid #00efff;
+    border-radius:14px;
+
+    color:#00efff;
+
+    font-family:Orbitron,sans-serif;
+    font-size:15px;
+    font-weight:800;
+
+    box-shadow:
+        0 0 12px rgba(0,239,255,.55),
+        inset 0 0 12px rgba(0,239,255,.08);
+}
+
+.brandText{
+    font-family:Orbitron,sans-serif;
+    font-size:17px;
+    font-weight:700;
+    letter-spacing:2px;
+}
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    color:#9bffdc;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+}
+
+.statusDot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:#00ff9d;
+
+    box-shadow:0 0 12px rgba(0,255,157,.75);
+}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero{
+    max-width:1100px;
+    margin:auto;
+    padding:90px 22px 65px;
+    text-align:center;
+}
+
+.badge{
+    display:inline-flex;
+    padding:9px 18px;
+
+    border:1px solid rgba(0,239,255,.55);
+    border-radius:30px;
+
+    background:rgba(0,239,255,.05);
+
+    color:#00efff;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2px;
+
+    box-shadow:0 0 15px rgba(0,239,255,.14);
+}
+
+.hero h1{
+    margin-top:22px;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:clamp(48px,9vw,92px);
+
+    line-height:1;
+
+    letter-spacing:3px;
+
+    /*
+      Static gradient instead of continuously animated
+      background-position.
+    */
+
+    background:
+        linear-gradient(
+            90deg,
+            #00efff,
+            #ffffff 32%,
+            #a45cff 65%,
+            #ff35c8
+        );
+
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+
+    filter:drop-shadow(0 0 12px rgba(0,239,255,.18));
+}
+
+.hero h2{
+    margin-top:18px;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:16px;
+    letter-spacing:4px;
+
+    color:#dceaff;
+}
+
+.hero p{
+    max-width:700px;
+    margin:20px auto 0;
+
+    color:#91a6c8;
+
+    font-size:14px;
+    line-height:1.7;
+}
+
+.heroButtons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:13px;
+    margin-top:30px;
+}
+
+.heroBtn{
+    min-height:50px;
+    padding:0 25px;
+
+    border:1px solid #00efff;
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(0,239,255,.10),
+            rgba(128,61,255,.12)
+        );
+
+    color:#fff;
+
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.3px;
+
+    cursor:pointer;
+
+    box-shadow:0 0 13px rgba(0,239,255,.18);
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        box-shadow .18s ease;
+}
+
+.heroBtn:hover{
+    transform:translateY(-3px);
+
+    background:rgba(0,239,255,.14);
+
+    box-shadow:
+        0 0 15px rgba(0,239,255,.65),
+        0 0 30px rgba(0,239,255,.18);
+}
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats{
+    max-width:950px;
+    margin:0 auto 65px;
+
+    padding:0 22px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.stat{
+    padding:20px;
+
+    text-align:center;
+
+    border:1px solid rgba(0,239,255,.18);
+    border-radius:17px;
+
+    background:rgba(7,15,40,.86);
+
+    transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.stat:hover{
+    transform:translateY(-4px);
+
+    border-color:#00efff;
+
+    box-shadow:
+        0 0 16px rgba(0,239,255,.18);
+}
+
+.stat strong{
+    display:block;
+
+    font-family:Orbitron,sans-serif;
+
+    color:#00efff;
+
+    font-size:25px;
+
+    text-shadow:0 0 10px rgba(0,239,255,.65);
+}
+
+.stat span{
+    display:block;
+
+    margin-top:7px;
+
+    color:#7085a9;
+
+    font-size:9px;
+    font-weight:800;
+    letter-spacing:1.7px;
+}
+
+/* =====================================================
+   SECTION
+===================================================== */
+
+.section{
+    max-width:1200px;
+    margin:auto;
+    padding:20px 22px 65px;
+}
+
+.sectionTitle{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.sectionTitle h2{
+    white-space:nowrap;
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:17px;
+    letter-spacing:2px;
+
+    text-shadow:0 0 10px rgba(0,239,255,.2);
+}
+
+.line{
+    flex:1;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(0,239,255,.8)
+        );
+}
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:20px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+
+    min-height:240px;
+
+    padding:28px;
+
+    border-radius:25px;
+
+    border:1px solid rgba(0,239,255,.42);
+
+    background:
+        linear-gradient(
+            135deg,
+            #08184b 0%,
+            #163ca1 45%,
+            #1768d6 72%,
+            #008fc9 100%
+        );
+
+    box-shadow:
+        0 14px 32px rgba(0,0,0,.34),
+        0 0 14px rgba(0,239,255,.12);
+
+    /*
+      IMPORTANT:
+      No infinite card animation.
+      Browser only animates when user interacts.
+    */
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease;
+}
+
+/*
+   Lightweight decorative glow.
+   No blur filter.
+*/
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:190px;
+    height:190px;
+
+    right:-105px;
+    top:-105px;
+
+    border-radius:50%;
+
+    background:rgba(0,239,255,.10);
+
+    pointer-events:none;
+}
+
+/*
+   Shine is activated ONLY on hover.
+   It does not continuously consume frames.
+*/
+
+.card::after{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:45%;
+    height:100%;
+
+    transform:skewX(-20deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.15),
+            transparent
+        );
+
+    pointer-events:none;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+
+    border-color:#00efff;
+
+    box-shadow:
+        0 20px 42px rgba(0,0,0,.42),
+        0 0 18px rgba(0,239,255,.7),
+        0 0 38px rgba(0,239,255,.20);
+}
+
+.card:hover::after{
+    left:145%;
+    transition:left .65s ease;
+}
+
+/* purple */
+
+.card:nth-child(3n){
+    background:
+        linear-gradient(
+            135deg,
+            #10164e,
+            #2938a9,
+            #613dd0,
+            #8c42d9
+        );
+
+    border-color:rgba(155,82,255,.5);
+}
+
+.card:nth-child(3n):hover{
+    border-color:#a45cff;
+
+    box-shadow:
+        0 20px 42px rgba(0,0,0,.42),
+        0 0 18px rgba(164,92,255,.75),
+        0 0 38px rgba(164,92,255,.22);
+}
+
+/* pink */
+
+.card:nth-child(4n){
+    background:
+        linear-gradient(
+            135deg,
+            #15134e,
+            #273aa5,
+            #7b35be,
+            #d23fa7
+        );
+
+    border-color:rgba(255,45,199,.48);
+}
+
+.card:nth-child(4n):hover{
+    border-color:#ff39ca;
+
+    box-shadow:
+        0 20px 42px rgba(0,0,0,.42),
+        0 0 18px rgba(255,57,202,.75),
+        0 0 38px rgba(255,57,202,.22);
+}
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.cardTop{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.icon{
+    width:62px;
+    height:62px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:17px;
+
+    color:#00efff;
+
+    background:rgba(0,239,255,.08);
+
+    border:1px solid rgba(0,239,255,.52);
+
+    box-shadow:
+        0 0 13px rgba(0,239,255,.20),
+        inset 0 0 14px rgba(0,239,255,.06);
+
+    font-family:Orbitron,sans-serif;
+
+    font-size:24px;
+    font-weight:800;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+.card:hover .icon{
+    transform:scale(1.06);
+
+    box-shadow:
+        0 0 18px rgba(0,239,255,.75);
+}
+
+.arrow{
+    width:44px;
+    height:44px;
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid rgba(255,255,255,.28);
+    border-radius:12px;
+
+    color:#fff;
+
+    font-size:20px;
+
+    transition:
+        transform .2s ease,
+        color .2s ease,
+        border-color .2s ease;
+}
+
+.card:hover .arrow{
+    color:#00efff;
+    border-color:#00efff;
+
+    box-shadow:0 0 12px rgba(0,239,255,.35);
+
+    transform:translateX(4px);
+}
+
+.card h3{
+    position:relative;
+    z-index:2;
+
+    margin-top:22px;
+
+    color:#fff;
+
+    font-size:21px;
+    font-weight:800;
+
+    line-height:1.3;
+
+    text-shadow:
+        0 2px 10px rgba(0,0,0,.45);
+}
+
+.card p{
+    position:relative;
+    z-index:2;
+
+    margin-top:8px;
+
+    color:#d2e1f2;
+
+    font-size:13px;
+    font-weight:500;
+
+    line-height:1.55;
+}
+
+/* =====================================================
+   ENTER
+===================================================== */
+
+.enter{
+    position:relative;
+    z-index:5;
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+
+    min-width:115px;
+    height:41px;
+
+    margin-top:18px;
+    padding:0 19px;
+
+    border:1px solid #00efff;
+    border-radius:11px;
+
+    background:rgba(0,239,255,.07);
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:11px;
+    font-weight:800;
+
+    letter-spacing:1.3px;
+
+    box-shadow:
+        0 0 11px rgba(0,239,255,.20);
+
+    transition:
+        transform .18s ease,
+        background .18s ease,
+        color .18s ease,
+        box-shadow .18s ease;
+}
+
+.enter span{
+    font-size:17px;
+
+    transition:transform .18s ease;
+}
+
+.enter:hover{
+    color:#021525;
+
+    background:#00efff;
+
+    box-shadow:
+        0 0 15px rgba(0,239,255,.85),
+        0 0 32px rgba(0,239,255,.28);
+
+    transform:translateY(-2px);
+}
+
+.enter:hover span{
+    transform:translateX(4px);
+}
+
+/* =====================================================
+   PREMIUM
+===================================================== */
+
+.premium{
+    position:relative;
+    overflow:hidden;
+
+    padding:36px;
+
+    border-radius:29px;
+
+    border:1px solid #00efff;
+
+    background:
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(0,239,255,.25),
+            transparent 28%
+        ),
+        linear-gradient(
+            120deg,
+            #102466,
+            #2057d3,
+            #078bd5,
+            #00b9d1
+        );
+
+    box-shadow:
+        0 0 18px rgba(0,239,255,.32),
+        0 25px 55px rgba(0,0,0,.38);
+}
+
+/* Lightweight static shine */
+
+.premium::after{
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    right:0;
+
+    width:35%;
+    height:100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.06)
+        );
+
+    pointer-events:none;
+}
+
+.premiumBadge{
+    position:relative;
+    z-index:2;
+
+    display:inline-block;
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    background:#00efff;
+
+    color:#06213b;
+
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+
+    box-shadow:
+        0 0 13px rgba(0,239,255,.65);
+}
+
+.premium h2{
+    position:relative;
+    z-index:2;
+
+    margin-top:20px;
+
+    font-size:clamp(28px,5vw,43px);
+
+    line-height:1.15;
+
+    text-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+
+.premium p{
+    position:relative;
+    z-index:2;
+
+    max-width:650px;
+
+    margin-top:10px;
+
+    color:#d9f8ff;
+
+    font-size:14px;
+    line-height:1.65;
+}
+
+.premium .enter{
+    margin-top:23px;
+
+    color:#063783;
+
+    background:#fff;
+    border-color:#fff;
+
+    box-shadow:
+        0 0 15px rgba(255,255,255,.42);
+}
+
+.premium .enter:hover{
+    color:#001b32;
+    background:#00efff;
+    border-color:#00efff;
+
+    box-shadow:
+        0 0 20px rgba(0,239,255,.85),
+        0 0 40px rgba(0,239,255,.25);
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+    padding:32px 20px;
+
+    text-align:center;
+
+    border-top:1px solid rgba(0,239,255,.13);
+
+    color:#566b8d;
+
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.6px;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:750px){
+
+    header{
+        height:70px;
+        padding:0 17px;
+    }
+
+    .logo{
+        width:43px;
+        height:43px;
+    }
+
+    .brandText{
+        font-size:14px;
+    }
+
+    .status span{
+        display:none;
+    }
+
+    .hero{
+        padding:70px 20px 50px;
+    }
+
+    .hero h1{
+        font-size:47px;
+        letter-spacing:1px;
+    }
+
+    .hero h2{
+        font-size:11px;
+        letter-spacing:2.5px;
+    }
+
+    .hero p{
+        font-size:13px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+        margin-bottom:50px;
+    }
+
+    .section{
+        padding:20px 17px 55px;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+        gap:18px;
+    }
+
+    .card{
+        min-height:235px;
+        padding:26px;
+    }
+
+    .card h3{
+        font-size:20px;
+    }
+
+    .card p{
+        font-size:13px;
+    }
+
+    .premium{
+        padding:29px 24px;
+    }
+
+    .premium h2{
+        font-size:29px;
+    }
+
+    /*
+       Disable hover shine on touch devices.
+    */
+
+    .card::after{
+        display:none;
+    }
+
+    .card:hover{
+        transform:none;
+    }
+}
+
+@media(max-width:400px){
+
+    .hero h1{
+        font-size:40px;
+    }
+
+    .sectionTitle h2{
+        font-size:13px;
+    }
+
+    .card h3{
+        font-size:18px;
+    }
+}
+
+/* =====================================================
+   REDUCE MOTION
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    html{
+        scroll-behavior:auto;
+    }
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+
+    <div class="grid"></div>
+
+    <div class="glow glow1"></div>
+    <div class="glow glow2"></div>
+    <div class="glow glow3"></div>
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="brand">
+
+        <div class="logo">
+            C9
+        </div>
+
+        <div class="brandText">
+            C9 UZAIR
+        </div>
+
+    </div>
+
+    <div class="status">
+
+        <i class="statusDot"></i>
+
+        <span>
+            SYSTEM ONLINE
+        </span>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero">
+
+    <div class="badge">
+        PRIVATE CYBER PORTAL
+    </div>
+
+    <h1>
+        C9 UZAIR
+    </h1>
+
+    <h2>
+        CYBER TOOL COLLECTION
+    </h2>
+
+    <p>
+        Welcome to the C9 UZAIR tool portal.
+        Select a module below to enter or purchase tools from Us WHATSAPP +92 316 2423759
+    </p>
+
+    <div class="heroButtons">
+
+        <button
+            class="heroBtn"
+            onclick="openTools()">
+
+            ENTER TOOL MATRIX
+
+        </button>
+
+        <button
+            class="heroBtn"
+            onclick="showInfo()">
+
+            SYSTEM INFO
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     STATS
+===================================================== -->
+
+<div class="stats">
+
+    <div class="stat">
+        <strong>19+</strong>
+        <span>MODULES</span>
+    </div>
+
+    <div class="stat">
+        <strong>24/7</strong>
+        <span>PORTAL</span>
+    </div>
+
+    <div class="stat">
+        <strong>C9</strong>
+        <span>NETWORK</span>
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     CYBER TOOLS
+===================================================== -->
+
+<section class="section" id="tools">
+
+    <div class="sectionTitle">
+
+        <div class="line"></div>
+
+        <h2>
+            CYBER TOOL MATRIX
+        </h2>
+
+        <div class="line"></div>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">W</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>WHATSAPP HACK</h3>
+
+            <p>
+                Hack Any WhatsApp Using This Tool.
+            </p>
+
+            <a href="./Tools/whatsapp.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">I</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>INSTAGRAM HACK</h3>
+
+            <p>
+                Instagram accounts hack tool.
+            </p>
+
+            <a href="./Tools/instagram.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">T</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>TIKTOK HACK</h3>
+
+            <p>
+                Tiktok accounts hack tool.
+            </p>
+
+            <a href="./Tools/tiktok.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">F</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>FACEBOOK HACK</h3>
+
+            <p>
+                Facebook account hack tool.
+            </p>
+
+            <a href="./Tools/facebook.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">S</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>SNAPCHAT HACK</h3>
+
+            <p>
+                Snapchat account hack tool.
+            </p>
+
+            <a href="./Tools/snapchat.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">X</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>TWITTER (X) HACK</h3>
+
+            <p>
+                You Can Hack Twitter Accounts with this.
+            </p>
+
+            <a href="./Tools/twitter.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">C</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>MOBILE CAMERA HACK</h3>
+
+            <p>
+                camera hack front / back.
+            </p>
+
+            <a href="./Tools/mobile-camera.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">M</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>CAMERA + MIC HACK</h3>
+
+            <p>
+                Camera and microphone hack.
+            </p>
+
+            <a href="./Tools/camera-mic.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">L</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>LOCATION HACK</h3>
+
+            <p>
+                Location hack android/iPhone.
+            </p>
+
+            <a href="./Tools/location.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">P</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>PUBG ACCOUNTS HACK</h3>
+
+            <p>
+                Hack PUBG accounts with this.
+            </p>
+
+            <a href="./Tools/pubg.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">FF</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>FREE FIRE ACCOUNTS HACK</h3>
+
+            <p>
+                Hack FREE FIRE accounts with this.
+            </p>
+
+            <a href="./Tools/free-fire.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">8</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>8 BALL POOL ACCOUNTS HACK</h3>
+
+            <p>
+                Hack 8 ball pool accounts with this module.
+            </p>
+
+            <a href="./Tools/8-ball-pool.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CARDING ZONE
+===================================================== -->
+
+<section class="section">
+
+    <div class="sectionTitle">
+
+        <div class="line"></div>
+
+        <h2>
+            CARDING ZONE
+        </h2>
+
+        <div class="line"></div>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">CC</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>CARDING CARDS</h3>
+
+            <p>
+                Want To Purchase Carding Cards?
+            </p>
+
+            <a href="./Tools/carding-cards.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">UC</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>PUBG CARDING UC</h3>
+
+            <p>
+                Purchase PUBG Carding UC.
+            </p>
+
+            <a href="./Tools/pubg-carding.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">D</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>FREE FIRE CARDING DIAMONDS</h3>
+
+            <p>
+                Purchase Free Fire Carding Diamonds.
+            </p>
+
+            <a href="./Tools/free-fire-carding.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">TK</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>TIKTOK CARDING COINS</h3>
+
+            <p>
+                Purchase TikTok Carding Coins.
+            </p>
+
+            <a href="./Tools/tiktok-carding.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">WP</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>WE PLAY CARDING COINS</h3>
+
+            <p>
+                Purchase WePlay Carding Coins.
+            </p>
+
+            <a href="./Tools/weplay-carding.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+
+        <div class="card">
+            <div class="cardTop">
+                <div class="icon">C</div>
+                <div class="arrow">→</div>
+            </div>
+
+            <h3>CARDING COURSE</h3>
+
+            <p>
+                We will give you complete Carding Method.
+            </p>
+
+            <a href="./Tools/carding-course.html" class="enter">
+                ENTER <span>→</span>
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PREMIUM
+===================================================== -->
+
+<section class="section">
+
+    <div class="sectionTitle">
+
+        <div class="line"></div>
+
+        <h2>
+            PREMIUM ACCESS
+        </h2>
+
+        <div class="line"></div>
+
+    </div>
+
+    <div class="premium">
+
+        <span class="premiumBadge">
+            C9 PREMIUM
+        </span>
+
+        <h2>
+            FULL MOBILE HACK
+        </h2>
+
+        <p>
+            Advanced mobile hacking / spy tool, you can control victim complete phone with this amazing tool.
+        </p>
+
+        <a
+            href="./Tools/full-mobile-hack.html"
+            class="enter">
+
+            ENTER PREMIUM
+            <span>→</span>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    C9 UZAIR
+    •
+    PRIVATE CYBER PORTAL
+    •
+
+</footer>
+
+
+<script>
+
+function openTools(){
+
+    document
+        .getElementById("tools")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+}
+
+
+function showInfo(){
+
+    alert(
+        "C9 UZAIR\n\n"+
+        "PRIVATE CYBER PORTAL\n"+
+        "19+ MODULES\n"+
+        "SYSTEM STATUS: ONLINE"
+    );
+
+}
+
+</script>
+
+</body>
+</html>
