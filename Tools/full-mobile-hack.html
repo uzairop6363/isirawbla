@@ -1,0 +1,3805 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>C9 UZAIR — Full Mobile Hack</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+  --bg:#06090d;
+  --panel:#0c1218;
+  --panel2:#101820;
+  --line:#202b35;
+  --text:#edf3f7;
+  --muted:#7d8b96;
+  --blue:#3f9cff;
+  --blue2:#6dbaff;
+  --green:#35d58a;
+  --red:#ff5365;
+}
+
+html,body{
+  width:100%;
+  min-height:100%;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,Helvetica,sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+button,input{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.screen{
+  display:none;
+  min-height:100vh;
+}
+
+.screen.active{
+  display:flex;
+}
+
+/* =====================================================
+   GLOBAL
+===================================================== */
+
+.console{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+  padding:28px;
+}
+
+.topbar{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid var(--line);
+  margin-bottom:35px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  letter-spacing:.8px;
+}
+
+.brandMark{
+  width:32px;
+  height:32px;
+  border:1px solid #344453;
+  border-radius:8px;
+  display:grid;
+  place-items:center;
+  color:var(--blue2);
+  font-size:13px;
+  font-weight:800;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:.7px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px rgba(53,213,138,.4);
+}
+
+.hero{
+  max-width:720px;
+  margin-bottom:30px;
+}
+
+.eyebrow{
+  color:var(--blue2);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  margin-bottom:13px;
+}
+
+h1{
+  font-size:clamp(32px,6vw,58px);
+  line-height:1.02;
+  letter-spacing:-2px;
+  margin-bottom:17px;
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  font-size:14px;
+}
+
+.panel{
+  background:linear-gradient(145deg,#0e141a,#0a1015);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:25px;
+}
+
+.panelTitle{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.panelSub{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:22px;
+}
+
+.primary{
+  width:100%;
+  min-height:50px;
+  border:1px solid #397eb9;
+  border-radius:9px;
+  color:white;
+  background:linear-gradient(180deg,#2178c4,#145e9d);
+  font-weight:700;
+  letter-spacing:.5px;
+  transition:.2s;
+}
+
+.primary:hover{
+  transform:translateY(-1px);
+  border-color:#65b3f4;
+}
+
+.primary:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.secondary{
+  min-height:46px;
+  padding:0 20px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  color:#dce5eb;
+  background:#10161c;
+  font-weight:600;
+}
+
+/* =====================================================
+   TOOL KEY LOCK
+===================================================== */
+
+body.key-locked{
+  overflow:hidden;
+}
+
+#keyOverlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:
+    radial-gradient(circle at 50% 20%,rgba(63,156,255,.09),transparent 35%),
+    rgba(4,7,10,.98);
+}
+
+.keyCard{
+  width:min(430px,100%);
+  border:1px solid #27343f;
+  border-radius:17px;
+  background:linear-gradient(145deg,#0e151b,#090e13);
+  padding:28px;
+  box-shadow:0 25px 80px rgba(0,0,0,.65);
+}
+
+.keyLogo{
+  width:54px;
+  height:54px;
+  border:1px solid #31516c;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  color:#6dbaff;
+  font-weight:800;
+  margin-bottom:22px;
+}
+
+.keyCard h2{
+  font-size:26px;
+  margin-bottom:8px;
+  letter-spacing:-.5px;
+}
+
+.keyCard > p{
+  color:#7f8d98;
+  font-size:12px;
+  line-height:1.6;
+  margin-bottom:22px;
+}
+
+.keyField{
+  position:relative;
+  margin-bottom:13px;
+}
+
+.keyField input{
+  width:100%;
+  height:50px;
+  background:#070c11;
+  border:1px solid #27343e;
+  border-radius:9px;
+  color:white;
+  outline:none;
+  padding:0 14px;
+  font-size:13px;
+}
+
+.keyField input:focus{
+  border-color:#4188bd;
+}
+
+.keyContinue{
+  width:100%;
+  height:50px;
+  border:1px solid #397eb9;
+  border-radius:9px;
+  background:linear-gradient(180deg,#237bc6,#145f9e);
+  color:white;
+  font-weight:700;
+  letter-spacing:.5px;
+}
+
+.keyMessage{
+  min-height:22px;
+  text-align:center;
+  margin-top:12px;
+  font-family:"Courier New",monospace;
+  font-size:11px;
+}
+
+.purchase{
+  margin-top:21px;
+  padding-top:18px;
+  border-top:1px solid #202a33;
+  text-align:center;
+  color:#8b99a4;
+  font-size:12px;
+  line-height:1.7;
+}
+
+.purchase strong{
+  color:#e8eef3;
+}
+
+.purchase a{
+  color:#65b7f8;
+  text-decoration:none;
+  font-weight:700;
+}
+
+.purchase a:hover{
+  text-decoration:underline;
+}
+
+/* =====================================================
+   SCAN
+===================================================== */
+
+.scanLayout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:20px;
+}
+
+.infoGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.infoBox{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:16px;
+  background:#0b1015;
+}
+
+.infoBox span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:1px;
+  margin-bottom:7px;
+}
+
+.infoBox strong{
+  font-size:13px;
+}
+
+.scanVisual{
+  min-height:300px;
+  border:1px solid var(--line);
+  border-radius:16px;
+  background:
+    radial-gradient(circle at center,rgba(63,156,255,.1),transparent 40%),
+    #0a0f14;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.radar{
+  width:190px;
+  height:190px;
+  border:1px solid #29425a;
+  border-radius:50%;
+  position:relative;
+}
+
+.radar:before{
+  content:"";
+  position:absolute;
+  inset:25px;
+  border:1px solid #1d3449;
+  border-radius:50%;
+}
+
+.radarLine{
+  position:absolute;
+  width:50%;
+  height:1px;
+  left:50%;
+  top:50%;
+  transform-origin:left;
+  background:linear-gradient(90deg,#5eb5ff,transparent);
+  animation:radarSpin 2.8s linear infinite;
+}
+
+@keyframes radarSpin{
+  to{transform:rotate(360deg)}
+}
+
+.scanCenter{
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:var(--blue2);
+  box-shadow:0 0 18px var(--blue);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progressPanel{
+  max-width:800px;
+}
+
+.progressHead{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:13px;
+}
+
+.progressHead span{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.progressHead strong{
+  font-size:12px;
+  color:var(--blue2);
+}
+
+.progress{
+  width:100%;
+  height:5px;
+  background:#171f27;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+
+.progressFill{
+  width:0%;
+  height:100%;
+  background:var(--blue);
+  transition:width .2s ease;
+}
+
+.logs{
+  border:1px solid var(--line);
+  background:#080d12;
+  border-radius:12px;
+  padding:16px;
+  min-height:260px;
+  font-family:"Courier New",monospace;
+  font-size:12px;
+  line-height:1.9;
+  color:#94a8b8;
+  overflow:hidden;
+}
+
+.logLine{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.logLine.ok{
+  color:#6fe0a3;
+}
+
+.logLine.blue{
+  color:#76baff;
+}
+
+/* =====================================================
+   DEVICES
+===================================================== */
+
+.deviceGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:13px;
+}
+
+.device{
+  text-align:left;
+  padding:19px;
+  min-height:125px;
+  border:1px solid var(--line);
+  border-radius:13px;
+  background:#0d1319;
+  color:white;
+  transition:.2s;
+}
+
+.device:hover{
+  border-color:#3b6b92;
+  transform:translateY(-2px);
+}
+
+.deviceIcon{
+  width:42px;
+  height:42px;
+  border-radius:10px;
+  border:1px solid #2a3946;
+  display:grid;
+  place-items:center;
+  color:#a9c9e4;
+  margin-bottom:14px;
+  font-size:15px;
+  font-weight:800;
+}
+
+.deviceName{
+  font-weight:700;
+  font-size:14px;
+}
+
+.deviceMeta{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:5px;
+}
+
+.networkBar{
+  margin-top:18px;
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:15px 17px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#0a0f14;
+}
+
+.connected{
+  color:var(--green);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+/* =====================================================
+   HACK LOGIN
+===================================================== */
+
+.loginWrap{
+  width:100%;
+  max-width:540px;
+  margin:auto;
+}
+
+.loginHeader{
+  text-align:center;
+  margin-bottom:27px;
+}
+
+.lockIcon{
+  width:58px;
+  height:58px;
+  border:1px solid #31516c;
+  border-radius:14px;
+  margin:0 auto 18px;
+  display:grid;
+  place-items:center;
+  color:var(--blue2);
+  font-size:22px;
+}
+
+.loginHeader h2{
+  font-size:27px;
+  margin-bottom:8px;
+}
+
+.loginHeader p{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.selectedDevice{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px;
+  background:#090e13;
+  border:1px solid var(--line);
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.selectedDevice small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-bottom:5px;
+}
+
+.selectedDevice strong{
+  font-size:13px;
+}
+
+.field{
+  margin-bottom:15px;
+}
+
+.field label{
+  display:block;
+  font-size:10px;
+  color:#8d9ca8;
+  letter-spacing:1.2px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.field input{
+  width:100%;
+  height:48px;
+  border-radius:8px;
+  border:1px solid #25313c;
+  background:#080d12;
+  color:white;
+  outline:none;
+  padding:0 13px;
+}
+
+.field input:focus{
+  border-color:#3d82b9;
+}
+
+.loginNote{
+  color:#71818d;
+  font-size:10px;
+  line-height:1.6;
+  margin:15px 0 19px;
+}
+
+.authStatus{
+  min-height:25px;
+  color:#7fa6c4;
+  font-family:"Courier New",monospace;
+  font-size:11px;
+  margin-top:14px;
+  text-align:center;
+}
+
+/* =====================================================
+   ACCESS GRANTED
+===================================================== */
+
+.granted{
+  text-align:center;
+  margin:auto;
+  width:min(600px,100%);
+}
+
+.grantedIcon{
+  width:78px;
+  height:78px;
+  margin:0 auto 22px;
+  border-radius:50%;
+  border:1px solid #276847;
+  display:grid;
+  place-items:center;
+  color:var(--green);
+  font-size:30px;
+}
+
+.granted h2{
+  font-size:34px;
+  margin-bottom:10px;
+}
+
+.warning{
+  margin:25px 0;
+  padding:17px;
+  border:1px solid #55471e;
+  background:#151207;
+  border-radius:10px;
+  color:#c8b878;
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* =====================================================
+   PHONE
+===================================================== */
+
+#phoneScreen{
+  background:#05070a;
+  min-height:100vh;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+
+.phoneBack{
+  position:fixed;
+  top:16px;
+  left:16px;
+  z-index:1000;
+  border:1px solid #28323b;
+  background:#0c1116;
+  color:#d8e2e9;
+  border-radius:8px;
+  height:36px;
+  padding:0 13px;
+  font-size:12px;
+}
+
+.phoneArea{
+  width:100%;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:70px 15px 20px;
+}
+
+.phone{
+  width:min(390px,94vw);
+  height:min(800px,82vh);
+  min-height:620px;
+  background:#080b0f;
+  border:7px solid #1b2026;
+  border-radius:38px;
+  box-shadow:0 25px 70px rgba(0,0,0,.7);
+  overflow:hidden;
+  position:relative;
+  touch-action:pan-y;
+}
+
+.statusbar{
+  height:31px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:0 16px;
+  font-size:10px;
+  color:#e6edf2;
+  position:relative;
+  z-index:30;
+}
+
+.statusRight{
+  display:flex;
+  gap:7px;
+  align-items:center;
+}
+
+.home{
+  position:absolute;
+  inset:31px 0 30px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(49,110,170,.18),transparent 32%),
+    radial-gradient(circle at 85% 70%,rgba(79,69,160,.13),transparent 30%),
+    linear-gradient(145deg,#0b1117,#080b10);
+}
+
+.homeSearch{
+  margin:15px;
+  height:39px;
+  border:1px solid #222d37;
+  border-radius:20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 14px;
+  color:#778792;
+  font-size:11px;
+}
+
+.pagesViewport{
+  position:absolute;
+  inset:65px 0 84px;
+  overflow:hidden;
+  touch-action:none;
+}
+
+.pagesTrack{
+  height:100%;
+  display:flex;
+  transition:transform .28s ease;
+}
+
+.page{
+  flex:0 0 100%;
+  width:100%;
+  padding:10px 14px;
+  overflow:hidden;
+}
+
+.appGrid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:17px 9px;
+}
+
+.app{
+  border:0;
+  background:none;
+  color:white;
+  min-width:0;
+  text-align:center;
+}
+
+.appIcon{
+  width:52px;
+  height:52px;
+  margin:auto;
+  border-radius:15px;
+  border:1px solid #27323d;
+  background:linear-gradient(145deg,#17212b,#0d1319);
+  display:grid;
+  place-items:center;
+  font-size:16px;
+  font-weight:800;
+  color:#c9d7e2;
+  box-shadow:0 5px 13px rgba(0,0,0,.2);
+  transition:.18s;
+}
+
+.app:active .appIcon{
+  transform:scale(.92);
+}
+
+.appName{
+  margin-top:7px;
+  font-size:9px;
+  color:#d5dfe5;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.pageDots{
+  position:absolute;
+  bottom:68px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:5px;
+}
+
+.pageDot{
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#39434d;
+}
+
+.pageDot.active{
+  background:#c5d4df;
+}
+
+.dock{
+  position:absolute;
+  left:10px;
+  right:10px;
+  bottom:7px;
+  height:62px;
+  border:1px solid #202a34;
+  background:rgba(12,17,22,.94);
+  border-radius:20px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:center;
+  z-index:20;
+}
+
+.dock .appIcon{
+  width:40px;
+  height:40px;
+  border-radius:12px;
+  margin:auto;
+  font-size:13px;
+}
+
+.navbar{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:40;
+}
+
+.navGesture{
+  width:92px;
+  height:4px;
+  border-radius:20px;
+  background:#dce4e9;
+  opacity:.7;
+}
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notificationPanel{
+  position:absolute;
+  inset:0 0 auto 0;
+  height:62%;
+  background:rgba(10,15,20,.98);
+  border-bottom:1px solid #2a3945;
+  border-radius:0 0 22px 22px;
+  z-index:100;
+  transform:translateY(-105%);
+  transition:transform .25s ease;
+  padding:17px 15px;
+}
+
+.notificationPanel.open{
+  transform:translateY(0);
+}
+
+.quickTitle{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:16px;
+  font-size:11px;
+  color:#aebbc5;
+}
+
+.quickGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:9px;
+}
+
+.quick{
+  min-height:55px;
+  border:1px solid #27333e;
+  background:#111820;
+  border-radius:12px;
+  color:#dce6ec;
+  font-size:10px;
+  font-weight:700;
+}
+
+.quick.on{
+  border-color:#397db1;
+  background:#14324a;
+}
+
+.brightness{
+  margin:15px 0;
+  height:7px;
+  background:#1d2932;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.brightness div{
+  width:70%;
+  height:100%;
+  background:#8eacbf;
+}
+
+.notification{
+  border:1px solid #222e38;
+  border-radius:11px;
+  padding:13px;
+  background:#0d1319;
+  margin-bottom:9px;
+}
+
+.notification strong{
+  font-size:11px;
+}
+
+.notification p{
+  margin-top:5px;
+  font-size:10px;
+  color:#82919c;
+  line-height:1.5;
+}
+
+/* =====================================================
+   APP VIEW
+===================================================== */
+
+.appView{
+  position:absolute;
+  inset:31px 0 30px;
+  background:#0a0f14;
+  z-index:80;
+  display:none;
+  flex-direction:column;
+}
+
+.appView.open{
+  display:flex;
+}
+
+.appTop{
+  height:55px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:0 15px;
+  border-bottom:1px solid #202a34;
+}
+
+.appBack{
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  border:1px solid #29343e;
+  background:#10161c;
+  color:white;
+}
+
+.appTop strong{
+  font-size:13px;
+}
+
+.appContent{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#778792;
+  font-size:12px;
+  text-align:center;
+  padding:25px;
+}
+
+.fakeAppCard{
+  border:1px solid #202c36;
+  border-radius:14px;
+  padding:25px;
+  width:90%;
+  background:#0e141a;
+}
+
+.fakeAppIcon{
+  width:58px;
+  height:58px;
+  margin:0 auto 15px;
+  display:grid;
+  place-items:center;
+  border-radius:16px;
+  border:1px solid #2a3946;
+  font-size:20px;
+  color:#cbd9e3;
+}
+
+.fakeAppCard h3{
+  color:white;
+  margin-bottom:7px;
+  font-size:16px;
+}
+
+.fakeAppCard p{
+  color:#788893;
+  line-height:1.6;
+  font-size:11px;
+}
+
+/* =====================================================
+   LOADING / ERROR
+===================================================== */
+
+.modalLayer{
+  position:absolute;
+  inset:0;
+  background:rgba(4,7,10,.94);
+  z-index:200;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.modalLayer.show{
+  display:flex;
+}
+
+.loadingBox,
+.errorBox{
+  width:100%;
+  max-width:310px;
+  text-align:center;
+  border:1px solid #293641;
+  background:#0d1319;
+  border-radius:15px;
+  padding:25px 20px;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  margin:0 auto 19px;
+  border:3px solid #26333e;
+  border-top-color:#5caeff;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+.loadingBox h3{
+  font-size:15px;
+  margin-bottom:8px;
+}
+
+.loadingBox p{
+  color:#758692;
+  font-size:11px;
+  margin-bottom:17px;
+}
+
+.loadingPercent{
+  color:#73b9f5;
+  font-family:"Courier New",monospace;
+  font-size:12px;
+}
+
+.errorIcon{
+  width:52px;
+  height:52px;
+  margin:0 auto 17px;
+  border:1px solid #71343c;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:#ff6877;
+  font-size:20px;
+}
+
+.errorBox h3{
+  font-size:15px;
+  margin-bottom:9px;
+}
+
+.errorBox p{
+  color:#81909a;
+  font-size:11px;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.errorActions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+
+.errorActions button{
+  height:40px;
+  border-radius:8px;
+  border:1px solid #28343e;
+  background:#111820;
+  color:#dbe5eb;
+  font-size:11px;
+  font-weight:700;
+}
+
+.errorActions .try{
+  border-color:#396e98;
+  background:#12314a;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px){
+
+  .console{
+    padding:20px;
+  }
+
+  .scanLayout{
+    grid-template-columns:1fr;
+  }
+
+  .scanVisual{
+    min-height:230px;
+  }
+
+  .deviceGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+@media(max-width:500px){
+
+  .console{
+    padding:17px;
+  }
+
+  .topbar{
+    margin-bottom:27px;
+  }
+
+  h1{
+    font-size:36px;
+  }
+
+  .device{
+    min-height:112px;
+    padding:15px;
+  }
+
+  .appGrid{
+    gap:15px 6px;
+  }
+
+  .appIcon{
+    width:49px;
+    height:49px;
+  }
+
+  .phone{
+    width:96vw;
+    height:82vh;
+  }
+}
+</style>
+</head>
+
+<body class="key-locked">
+
+<!-- =====================================================
+     TOOL KEY LOGIN
+===================================================== -->
+
+<div id="keyOverlay">
+
+  <div class="keyCard">
+
+    <div class="keyLogo">C9</div>
+
+    <h2>Enter Key To Continue</h2>
+
+    <p>
+      Enter your access key to continue to Full Mobile Hack.
+    </p>
+
+    <div class="keyField">
+
+      <input
+        id="toolKeyInput"
+        type="password"
+        autocomplete="off"
+        placeholder="Enter your tool key"
+      >
+
+    </div>
+
+    <button
+      class="keyContinue"
+      id="toolKeyButton"
+    >
+      CONTINUE
+    </button>
+
+    <div
+      class="keyMessage"
+      id="toolKeyMessage"
+    ></div>
+
+    <div class="purchase">
+
+      Don't Have Key ?<br>
+
+      Purchase From Us
+
+      <a
+        href="https://wa.me/923162423759?text=Hello%20C9%20UZAIR%2C%20I%20want%20to%20purchase%20the%20Full%20Mobile%20Hack%20Tool%20Key."
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        +92 316 2423759
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<div id="app">
+
+<!-- =====================================================
+     SCREEN 1
+===================================================== -->
+
+<section id="screen1" class="screen active">
+
+  <div class="console">
+
+    <div class="topbar">
+
+      <div class="brand">
+        <div class="brandMark">C9</div>
+        <span>Full Mobile Hack Tool</span>
+      </div>
+
+      <div class="status">
+        <span class="dot"></span>
+        CONNECTED
+      </div>
+
+    </div>
+
+    <div class="scanLayout">
+
+      <div>
+
+        <div class="hero">
+
+          <div class="eyebrow">
+            HACK TOOL
+          </div>
+
+          <h1>
+            Full Mobile Hack Tool<br>
+            By --- C9 UZAIR )
+          </h1>
+
+          <p>
+            Advanced complete mobile hack tool with device discovery,
+            authentication, access sequence and a complete mobile access.
+          </p>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panelTitle">
+            Same Network Discovery
+          </div>
+
+          <div class="panelSub">
+            Scan available devices connected to the network.
+          </div>
+
+
+          <div class="infoGrid">
+
+            <div class="infoBox">
+              <span>NETWORK</span>
+              <strong>CONNECTED</strong>
+            </div>
+
+            <div class="infoBox">
+              <span>MODE</span>
+              <strong>HACK</strong>
+            </div>
+
+            <div class="infoBox">
+              <span>DISCOVERY</span>
+              <strong>DEVICE SCAN</strong>
+            </div>
+
+            <div class="infoBox">
+              <span>ACCESS</span>
+              <strong>AUTH REQUIRED</strong>
+            </div>
+
+          </div>
+
+          <br>
+
+          <button
+            class="primary"
+            id="startScan"
+          >
+            SCAN AVAILABLE DEVICES
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="scanVisual">
+
+        <div class="radar">
+
+          <div class="radarLine"></div>
+
+          <div class="scanCenter"></div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCREEN 2
+===================================================== -->
+
+<section id="screen2" class="screen">
+
+  <div class="console">
+
+    <div class="topbar">
+
+      <div class="brand">
+        <div class="brandMark">C9</div>
+        <span>NETWORK DISCOVERY</span>
+      </div>
+
+      <div class="status">
+        <span class="dot"></span>
+        SCANNING
+      </div>
+
+    </div>
+
+
+    <div class="hero">
+
+      <div class="eyebrow">
+        DISCOVERY ENGINE
+      </div>
+
+      <h1>
+        Scanning<br>
+        Network.
+      </h1>
+
+      <p>
+        Searching for available mobile endpoints.
+      </p>
+
+    </div>
+
+
+    <div class="panel progressPanel">
+
+      <div class="progressHead">
+
+        <span id="scanText">
+          Initializing discovery...
+        </span>
+
+        <strong id="scanPercent">
+          0%
+        </strong>
+
+      </div>
+
+
+      <div class="progress">
+
+        <div
+          class="progressFill"
+          id="scanFill"
+        ></div>
+
+      </div>
+
+
+      <div
+        class="logs"
+        id="scanLogs"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCREEN 3
+===================================================== -->
+
+<section id="screen3" class="screen">
+
+  <div class="console">
+
+    <div class="topbar">
+
+      <div class="brand">
+        <div class="brandMark">C9</div>
+        <span>AVAILABLE DEVICES</span>
+      </div>
+
+      <div class="status">
+        <span class="dot"></span>
+        CONNECTED
+      </div>
+
+    </div>
+
+
+    <div class="hero">
+
+      <div class="eyebrow">
+        ENDPOINT SELECTION
+      </div>
+
+      <h1>
+        Select<br>
+        Target Device.
+      </h1>
+
+      <p>
+        Select an available mobile endpoint.
+      </p>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="deviceGrid">
+
+        <button
+          class="device"
+          data-device="Samsung"
+        >
+          <div class="deviceIcon">S</div>
+          <div class="deviceName">Samsung</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+
+        <button
+          class="device"
+          data-device="Infinix"
+        >
+          <div class="deviceIcon">I</div>
+          <div class="deviceName">Infinix</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+
+        <button
+          class="device"
+          data-device="TECNO"
+        >
+          <div class="deviceIcon">T</div>
+          <div class="deviceName">TECNO</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+
+        <button
+          class="device"
+          data-device="Xiaomi"
+        >
+          <div class="deviceIcon">X</div>
+          <div class="deviceName">Xiaomi</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+
+        <button
+          class="device"
+          data-device="OPPO"
+        >
+          <div class="deviceIcon">O</div>
+          <div class="deviceName">OPPO</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+
+        <button
+          class="device"
+          data-device="Vivo"
+        >
+          <div class="deviceIcon">V</div>
+          <div class="deviceName">Vivo</div>
+          <div class="deviceMeta">Android endpoint</div>
+        </button>
+
+      </div>
+
+
+      <div class="networkBar">
+
+        <div>
+
+          <div
+            style="font-size:11px;color:#7f8d99;margin-bottom:4px"
+          >
+            NETWORK STATUS
+          </div>
+
+          <strong style="font-size:13px">
+            LOCAL CONNECTION
+          </strong>
+
+        </div>
+
+        <div class="connected">
+          CONNECTED
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCREEN 4 — HACK LOGIN
+===================================================== -->
+
+<section id="screen4" class="screen">
+
+  <div class="console">
+
+    <div class="topbar">
+
+      <div class="brand">
+        <div class="brandMark">C9</div>
+        <span>SECURE AUTHENTICATION</span>
+      </div>
+
+      <div class="status">
+        <span class="dot"></span>
+        AUTH GATE
+      </div>
+
+    </div>
+
+
+    <div class="loginWrap">
+
+      <div class="loginHeader">
+
+        <div class="lockIcon">
+          ⌁
+        </div>
+
+        <h2>
+          Hack Login
+        </h2>
+
+        <p>
+          Authenticate the selected endpoint to continue.
+        </p>
+
+      </div>
+
+
+      <div class="panel">
+
+        <div class="selectedDevice">
+
+          <div>
+
+            <small>
+              SELECTED DEVICE
+            </small>
+
+            <strong id="selectedDeviceName">
+              Unknown
+            </strong>
+
+          </div>
+
+          <div
+            style="color:#63b5ff;font-size:11px"
+          >
+            READY
+          </div>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            LOGIN ID
+          </label>
+
+          <input
+            id="loginId"
+            type="text"
+            autocomplete="off"
+            placeholder="Enter login ID"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label>
+            ACCESS KEY
+          </label>
+
+          <input
+            id="accessKey"
+            type="password"
+            autocomplete="off"
+            placeholder="Enter access key"
+          >
+
+        </div>
+
+
+        <div class="loginNote">
+          Secure authentication is required before continuing.
+        </div>
+
+
+        <button
+          class="primary"
+          id="loginBtn"
+        >
+          AUTHENTICATE & CONTINUE
+        </button>
+
+
+        <div
+          class="authStatus"
+          id="authStatus"
+        ></div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCREEN 5 — ACCESS
+===================================================== -->
+
+<section id="screen5" class="screen">
+
+  <div class="console">
+
+    <div class="topbar">
+
+      <div class="brand">
+        <div class="brandMark">C9</div>
+        <span>ACCESS SEQUENCE</span>
+      </div>
+
+      <div class="status">
+        <span class="dot"></span>
+        PROCESSING
+      </div>
+
+    </div>
+
+
+    <div class="hero">
+
+      <div class="eyebrow">
+        SECURITY ENGINE
+      </div>
+
+      <h1>
+        Establishing<br>
+        Access.
+      </h1>
+
+      <p id="accessDescription">
+        Preparing secure access session.
+      </p>
+
+    </div>
+
+
+    <div class="panel progressPanel">
+
+      <div class="progressHead">
+
+        <span id="accessText">
+          Initializing...
+        </span>
+
+        <strong id="accessPercent">
+          0%
+        </strong>
+
+      </div>
+
+
+      <div class="progress">
+
+        <div
+          class="progressFill"
+          id="accessFill"
+        ></div>
+
+      </div>
+
+
+      <div
+        class="logs"
+        id="accessLogs"
+      ></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     SCREEN 6
+===================================================== -->
+
+<section id="screen6" class="screen">
+
+  <div class="console">
+
+    <div class="granted">
+
+      <div class="grantedIcon">
+        ✓
+      </div>
+
+      <div class="eyebrow">
+        SESSION READY
+      </div>
+
+      <h2>
+        Access Granted
+      </h2>
+
+      <p
+        style="color:#7f8d99;line-height:1.7;font-size:13px"
+      >
+        Mobile environment is ready.
+      </p>
+
+
+      <div class="warning">
+
+        <strong>
+          WARNING
+        </strong>
+
+        <br>
+
+        Do not use this TOOL to harm anyone
+        or access systems without authorization.
+
+      </div>
+
+
+      <button
+        class="primary"
+        id="openPhone"
+      >
+        OPEN MOBILE ENVIRONMENT
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     PHONE
+===================================================== -->
+
+<section id="phoneScreen" class="screen">
+
+  <button
+    class="phoneBack"
+    id="phoneBack"
+  >
+    ← BACK
+  </button>
+
+
+  <div class="phoneArea">
+
+    <div
+      class="phone"
+      id="phone"
+    >
+
+      <div class="statusbar">
+
+        <span id="phoneTime">
+          00:00
+        </span>
+
+        <div class="statusRight">
+          <span>▮▮▮</span>
+          <span>WiFi</span>
+          <span>0%</span>
+        </div>
+
+      </div>
+
+
+      <div
+        class="home"
+        id="home"
+      >
+
+        <div class="homeSearch">
+          <span>⌕</span>
+          <span>Search</span>
+        </div>
+
+
+        <div
+          class="pagesViewport"
+          id="pagesViewport"
+        >
+
+          <div
+            class="pagesTrack"
+            id="pagesTrack"
+          >
+
+
+            <!-- PAGE 1 -->
+
+            <div class="page">
+
+              <div class="appGrid">
+
+                <button class="app" data-app="WhatsApp">
+                  <div class="appIcon">WA</div>
+                  <div class="appName">WhatsApp</div>
+                </button>
+
+                <button class="app" data-app="Instagram">
+                  <div class="appIcon">IG</div>
+                  <div class="appName">Instagram</div>
+                </button>
+
+                <button class="app" data-app="Snapchat">
+                  <div class="appIcon">SC</div>
+                  <div class="appName">Snapchat</div>
+                </button>
+
+                <button class="app" data-app="TikTok">
+                  <div class="appIcon">TT</div>
+                  <div class="appName">TikTok</div>
+                </button>
+
+                <button class="app" data-app="X">
+                  <div class="appIcon">X</div>
+                  <div class="appName">X</div>
+                </button>
+
+                <button class="app" data-app="Mail">
+                  <div class="appIcon">@</div>
+                  <div class="appName">Mail</div>
+                </button>
+
+                <button class="app" data-app="Messages">
+                  <div class="appIcon">MSG</div>
+                  <div class="appName">Messages</div>
+                </button>
+
+                <button class="app" data-app="Contacts">
+                  <div class="appIcon">CT</div>
+                  <div class="appName">Contacts</div>
+                </button>
+
+                <button class="app" data-app="Phone">
+                  <div class="appIcon">TEL</div>
+                  <div class="appName">Phone</div>
+                </button>
+
+                <button class="app" data-app="Gallery">
+                  <div class="appIcon">GAL</div>
+                  <div class="appName">Gallery</div>
+                </button>
+
+                <button class="app" data-app="Photos">
+                  <div class="appIcon">PH</div>
+                  <div class="appName">Photos</div>
+                </button>
+
+                <button class="app" data-app="Camera">
+                  <div class="appIcon">CAM</div>
+                  <div class="appName">Camera</div>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- PAGE 2 -->
+
+            <div class="page">
+
+              <div class="appGrid">
+
+                <button class="app" data-app="Browser">
+                  <div class="appIcon">WEB</div>
+                  <div class="appName">Browser</div>
+                </button>
+
+                <button class="app" data-app="Maps">
+                  <div class="appIcon">MAP</div>
+                  <div class="appName">Maps</div>
+                </button>
+
+                <button class="app" data-app="Calendar">
+                  <div class="appIcon">CAL</div>
+                  <div class="appName">Calendar</div>
+                </button>
+
+                <button class="app" data-app="Clock">
+                  <div class="appIcon">CLK</div>
+                  <div class="appName">Clock</div>
+                </button>
+
+                <button class="app" data-app="Calculator">
+                  <div class="appIcon">123</div>
+                  <div class="appName">Calculator</div>
+                </button>
+
+                <button class="app" data-app="Music">
+                  <div class="appIcon">♪</div>
+                  <div class="appName">Music</div>
+                </button>
+
+                <button class="app" data-app="Downloads">
+                  <div class="appIcon">↓</div>
+                  <div class="appName">Downloads</div>
+                </button>
+
+                <button class="app" data-app="Notes">
+                  <div class="appIcon">NT</div>
+                  <div class="appName">Notes</div>
+                </button>
+
+                <button class="app" data-app="Files">
+                  <div class="appIcon">FIL</div>
+                  <div class="appName">File Manager</div>
+                </button>
+
+                <button class="app" data-app="Settings">
+                  <div class="appIcon">SET</div>
+                  <div class="appName">Settings</div>
+                </button>
+
+                <button class="app" data-app="Recorder">
+                  <div class="appIcon">REC</div>
+                  <div class="appName">Recorder</div>
+                </button>
+
+                <button class="app" data-app="Documents">
+                  <div class="appIcon">DOC</div>
+                  <div class="appName">Documents</div>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- PAGE 3 -->
+
+            <div class="page">
+
+              <div class="appGrid">
+
+                <button class="app" data-app="YouTube">
+                  <div class="appIcon">YT</div>
+                  <div class="appName">YouTube</div>
+                </button>
+
+                <button class="app" data-app="Gmail">
+                  <div class="appIcon">GM</div>
+                  <div class="appName">Gmail</div>
+                </button>
+
+                <button class="app" data-app="Drive">
+                  <div class="appIcon">DRV</div>
+                  <div class="appName">Drive</div>
+                </button>
+
+                <button class="app" data-app="Play Store">
+                  <div class="appIcon">PS</div>
+                  <div class="appName">Play Store</div>
+                </button>
+
+                <button class="app" data-app="Chrome">
+                  <div class="appIcon">CHR</div>
+                  <div class="appName">Chrome</div>
+                </button>
+
+                <button class="app" data-app="Meet">
+                  <div class="appIcon">MEET</div>
+                  <div class="appName">Meet</div>
+                </button>
+
+                <button class="app" data-app="Translate">
+                  <div class="appIcon">TR</div>
+                  <div class="appName">Translate</div>
+                </button>
+
+                <button class="app" data-app="Keep">
+                  <div class="appIcon">KP</div>
+                  <div class="appName">Keep</div>
+                </button>
+
+                <button class="app" data-app="Google">
+                  <div class="appIcon">G</div>
+                  <div class="appName">Google</div>
+                </button>
+
+                <button class="app" data-app="News">
+                  <div class="appIcon">NEWS</div>
+                  <div class="appName">News</div>
+                </button>
+
+                <button class="app" data-app="Weather">
+                  <div class="appIcon">WX</div>
+                  <div class="appName">Weather</div>
+                </button>
+
+                <button class="app" data-app="Assistant">
+                  <div class="appIcon">AST</div>
+                  <div class="appName">Assistant</div>
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <!-- PAGE 4 -->
+
+            <div class="page">
+
+              <div class="appGrid">
+
+                <button class="app" data-app="Security">
+                  <div class="appIcon">SEC</div>
+                  <div class="appName">Security</div>
+                </button>
+
+                <button class="app" data-app="Device Care">
+                  <div class="appIcon">CARE</div>
+                  <div class="appName">Device Care</div>
+                </button>
+
+                <button class="app" data-app="Share">
+                  <div class="appIcon">SHR</div>
+                  <div class="appName">Share</div>
+                </button>
+
+                <button class="app" data-app="Wallet">
+                  <div class="appIcon">WAL</div>
+                  <div class="appName">Wallet</div>
+                </button>
+
+                <button class="app" data-app="VPN">
+                  <div class="appIcon">VPN</div>
+                  <div class="appName">VPN</div>
+                </button>
+
+                <button class="app" data-app="Terminal">
+                  <div class="appIcon">&gt;_</div>
+                  <div class="appName">Terminal</div>
+                </button>
+
+                <button class="app" data-app="Backup">
+                  <div class="appIcon">BKP</div>
+                  <div class="appName">Backup</div>
+                </button>
+
+                <button class="app" data-app="System UI">
+                  <div class="appIcon">SYS</div>
+                  <div class="appName">System UI</div>
+                </button>
+
+                <button class="app" data-app="App Manager">
+                  <div class="appIcon">APP</div>
+                  <div class="appName">App Manager</div>
+                </button>
+
+                <button class="app" data-app="QR Scanner">
+                  <div class="appIcon">QR</div>
+                  <div class="appName">QR Scanner</div>
+                </button>
+
+                <button class="app" data-app="Compass">
+                  <div class="appIcon">CMP</div>
+                  <div class="appName">Compass</div>
+                </button>
+
+                <button class="app" data-app="Torch">
+                  <div class="appIcon">LGT</div>
+                  <div class="appName">Torch</div>
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="pageDots">
+
+          <div class="pageDot active"></div>
+          <div class="pageDot"></div>
+          <div class="pageDot"></div>
+          <div class="pageDot"></div>
+
+        </div>
+
+
+        <div class="dock">
+
+          <button class="app" data-app="Phone">
+            <div class="appIcon">TEL</div>
+          </button>
+
+          <button class="app" data-app="Messages">
+            <div class="appIcon">MSG</div>
+          </button>
+
+          <button class="app" data-app="Browser">
+            <div class="appIcon">WEB</div>
+          </button>
+
+          <button class="app" data-app="Camera">
+            <div class="appIcon">CAM</div>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- NOTIFICATION -->
+
+      <div
+        class="notificationPanel"
+        id="notificationPanel"
+      >
+
+        <div class="quickTitle">
+          <strong>Quick Controls</strong>
+          <span>12:48</span>
+        </div>
+
+
+        <div class="quickGrid">
+
+          <button class="quick on">
+            Wi-Fi
+          </button>
+
+          <button class="quick on">
+            Bluetooth
+          </button>
+
+          <button class="quick">
+            Silent
+          </button>
+
+          <button class="quick">
+            Airplane
+          </button>
+
+          <button class="quick on">
+            Location
+          </button>
+
+          <button class="quick">
+            Hotspot
+          </button>
+
+        </div>
+
+
+        <div class="brightness">
+          <div></div>
+        </div>
+
+
+        <div class="notification">
+
+          <strong>
+            Security Service
+          </strong>
+
+          <p>
+            Mobile access session is active.
+          </p>
+
+        </div>
+
+
+        <div class="notification">
+
+          <strong>
+            System
+          </strong>
+
+          <p>
+            4 application pages available.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- APP VIEW -->
+
+      <div
+        class="appView"
+        id="appView"
+      >
+
+        <div class="appTop">
+
+          <button
+            class="appBack"
+            id="appBack"
+          >
+            ←
+          </button>
+
+          <strong id="appTitle">
+            Application
+          </strong>
+
+        </div>
+
+
+        <div class="appContent">
+
+          <div class="fakeAppCard">
+
+            <div
+              class="fakeAppIcon"
+              id="fakeAppIcon"
+            >
+              APP
+            </div>
+
+            <h3 id="fakeAppTitle">
+              Application
+            </h3>
+
+            <p>
+              Loading application environment...
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- LOADING -->
+
+      <div
+        class="modalLayer"
+        id="loadingLayer"
+      >
+
+        <div class="loadingBox">
+
+          <div class="spinner"></div>
+
+          <h3 id="loadingTitle">
+            Opening Application
+          </h3>
+
+          <p>
+            Loading secure application environment...
+          </p>
+
+
+          <div class="progress">
+
+            <div
+              class="progressFill"
+              id="appLoadingFill"
+            ></div>
+
+          </div>
+
+
+          <div
+            class="loadingPercent"
+            id="loadingPercent"
+          >
+            0%
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ROOT ERROR -->
+
+      <div
+        class="modalLayer"
+        id="errorLayer"
+      >
+
+        <div class="errorBox">
+
+          <div class="errorIcon">
+            !
+          </div>
+
+          <h3>
+            YOUR DEVICE IS NOT ROOTED
+          </h3>
+
+          <p>
+            Please root your device to continue.
+          </p>
+
+
+          <div class="errorActions">
+
+            <button id="errorBack">
+              BACK
+            </button>
+
+            <button
+              class="try"
+              id="tryAgain"
+            >
+              TRY AGAIN
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="navbar">
+        <div class="navGesture"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   TOOL KEY
+========================================================= */
+
+const TOOL_KEY =
+  "full-mobile-hack-key-BSRgoeU30lFTobwo72";
+
+const keyOverlay =
+  document.getElementById("keyOverlay");
+
+const keyInput =
+  document.getElementById("toolKeyInput");
+
+const keyButton =
+  document.getElementById("toolKeyButton");
+
+const keyMessage =
+  document.getElementById("toolKeyMessage");
+
+let toolUnlocked = false;
+
+
+/* First interaction anywhere opens key screen */
+
+function requireToolKey(event){
+
+  if(toolUnlocked){
+    return;
+  }
+
+  if(
+    event.target &&
+    event.target.closest &&
+    event.target.closest("#keyOverlay")
+  ){
+    return;
+  }
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  keyOverlay.style.display = "flex";
+
+  setTimeout(()=>{
+    keyInput.focus();
+  },50);
+
+}
+
+
+/*
+  Capture first interaction.
+*/
+
+[
+  "pointerdown",
+  "click",
+  "touchstart",
+  "wheel",
+  "scroll",
+  "keydown"
+].forEach(type=>{
+
+  document.addEventListener(
+    type,
+    requireToolKey,
+    true
+  );
+
+});
+
+
+/* Prevent keyboard interaction behind gate */
+
+keyOverlay.addEventListener(
+  "click",
+  e=>{
+    e.stopPropagation();
+  }
+);
+
+keyOverlay.addEventListener(
+  "pointerdown",
+  e=>{
+    e.stopPropagation();
+  }
+);
+
+
+/* Key validation */
+
+function unlockTool(){
+
+  const entered =
+    keyInput.value.trim();
+
+  if(entered === TOOL_KEY){
+
+    keyMessage.textContent =
+      "ACCESS KEY ACCEPTED";
+
+    keyMessage.style.color =
+      "#55d994";
+
+    keyButton.disabled = true;
+
+    setTimeout(()=>{
+
+      toolUnlocked = true;
+
+      document.body.classList.remove(
+        "key-locked"
+      );
+
+      keyOverlay.style.display =
+        "none";
+
+      keyButton.disabled = false;
+
+    },700);
+
+  }else{
+
+    keyMessage.textContent =
+      "WRONG KEY";
+
+    keyMessage.style.color =
+      "#ff6575";
+
+    keyInput.select();
+
+  }
+
+}
+
+keyButton.addEventListener(
+  "click",
+  unlockTool
+);
+
+keyInput.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key === "Enter"){
+      unlockTool();
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SCREEN SYSTEM
+========================================================= */
+
+const screens = {
+
+  screen1:
+    document.getElementById("screen1"),
+
+  screen2:
+    document.getElementById("screen2"),
+
+  screen3:
+    document.getElementById("screen3"),
+
+  screen4:
+    document.getElementById("screen4"),
+
+  screen5:
+    document.getElementById("screen5"),
+
+  screen6:
+    document.getElementById("screen6"),
+
+  phoneScreen:
+    document.getElementById("phoneScreen")
+
+};
+
+
+function showScreen(name){
+
+  Object.values(screens)
+    .forEach(screen=>{
+      screen.classList.remove("active");
+    });
+
+  screens[name]
+    .classList.add("active");
+
+  window.scrollTo(0,0);
+
+}
+
+
+/* =========================================================
+   SCAN
+========================================================= */
+
+const startScan =
+  document.getElementById("startScan");
+
+const scanFill =
+  document.getElementById("scanFill");
+
+const scanPercent =
+  document.getElementById("scanPercent");
+
+const scanText =
+  document.getElementById("scanText");
+
+const scanLogs =
+  document.getElementById("scanLogs");
+
+
+startScan.addEventListener(
+  "click",
+  ()=>{
+
+    showScreen("screen2");
+
+    scanLogs.innerHTML = "";
+
+    let progress = 0;
+
+    const messages = [
+
+      ["Initializing discovery engine...","blue"],
+      ["Checking local connection...","ok"],
+      ["Network interface ready.","ok"],
+      ["Scanning available endpoints...","blue"],
+      ["Searching Android devices...","blue"],
+      ["Checking Samsung endpoint...","ok"],
+      ["Checking Infinix endpoint...","ok"],
+      ["Checking TECNO endpoint...","ok"],
+      ["Checking Xiaomi endpoint...","ok"],
+      ["Checking OPPO endpoint...","ok"],
+      ["Checking Vivo endpoint...","ok"],
+      ["Device discovery completed.","ok"]
+
+    ];
+
+    let index = 0;
+
+    const logTimer =
+      setInterval(()=>{
+
+        if(index < messages.length){
+
+          const line =
+            document.createElement("div");
+
+          line.className =
+            "logLine " +
+            messages[index][1];
+
+          line.textContent =
+            "> " +
+            messages[index][0];
+
+          scanLogs.appendChild(line);
+
+          index++;
+
+        }else{
+
+          clearInterval(logTimer);
+
+        }
+
+      },430);
+
+
+    const progressTimer =
+      setInterval(()=>{
+
+        progress +=
+          Math.floor(Math.random()*7)+3;
+
+        if(progress >= 100){
+          progress = 100;
+        }
+
+        scanFill.style.width =
+          progress + "%";
+
+        scanPercent.textContent =
+          progress + "%";
+
+
+        if(progress < 25){
+
+          scanText.textContent =
+            "Initializing discovery...";
+
+        }else if(progress < 55){
+
+          scanText.textContent =
+            "Scanning endpoints...";
+
+        }else if(progress < 85){
+
+          scanText.textContent =
+            "Analyzing devices...";
+
+        }else{
+
+          scanText.textContent =
+            "Discovery complete.";
+
+        }
+
+
+        if(progress >= 100){
+
+          clearInterval(progressTimer);
+
+          setTimeout(()=>{
+            showScreen("screen3");
+          },800);
+
+        }
+
+      },250);
+
+  }
+);
+
+
+/* =========================================================
+   DEVICE SELECTION
+========================================================= */
+
+let selectedDevice =
+  "Unknown";
+
+const selectedDeviceName =
+  document.getElementById(
+    "selectedDeviceName"
+  );
+
+
+document.querySelectorAll(".device")
+.forEach(device=>{
+
+  device.addEventListener(
+    "click",
+    ()=>{
+
+      selectedDevice =
+        device.dataset.device;
+
+      selectedDeviceName.textContent =
+        selectedDevice;
+
+      document.getElementById(
+        "authStatus"
+      ).textContent = "";
+
+      document.getElementById(
+        "loginId"
+      ).value = "";
+
+      document.getElementById(
+        "accessKey"
+      ).value = "";
+
+      showScreen("screen4");
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   HACK LOGIN
+========================================================= */
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const loginId =
+  document.getElementById("loginId");
+
+const accessKey =
+  document.getElementById("accessKey");
+
+const authStatus =
+  document.getElementById("authStatus");
+
+
+loginBtn.addEventListener(
+  "click",
+  ()=>{
+
+    const id =
+      loginId.value.trim();
+
+    const key =
+      accessKey.value.trim();
+
+
+    if(!id || !key){
+
+      authStatus.textContent =
+        "ERROR: LOGIN ID AND ACCESS KEY REQUIRED.";
+
+      authStatus.style.color =
+        "#ff6877";
+
+      return;
+
+    }
+
+
+    loginBtn.disabled = true;
+
+    let count = 0;
+
+    authStatus.style.color =
+      "#75b8ed";
+
+
+    const steps = [
+
+      "Validating access credentials...",
+      "Checking secure channel...",
+      "Authorizing endpoint...",
+      "Authentication accepted."
+
+    ];
+
+
+    const timer =
+      setInterval(()=>{
+
+        authStatus.textContent =
+          "> " + steps[count];
+
+        count++;
+
+
+        if(count >= steps.length){
+
+          clearInterval(timer);
+
+          setTimeout(()=>{
+
+            loginBtn.disabled =
+              false;
+
+            startAccessSequence();
+
+          },700);
+
+        }
+
+      },650);
+
+  }
+);
+
+
+/* =========================================================
+   ACCESS SEQUENCE
+========================================================= */
+
+function startAccessSequence(){
+
+  showScreen("screen5");
+
+
+  document.getElementById(
+    "accessDescription"
+  ).textContent =
+    "Establishing secure access for " +
+    selectedDevice + ".";
+
+
+  const fill =
+    document.getElementById(
+      "accessFill"
+    );
+
+  const percent =
+    document.getElementById(
+      "accessPercent"
+    );
+
+  const text =
+    document.getElementById(
+      "accessText"
+    );
+
+  const logs =
+    document.getElementById(
+      "accessLogs"
+    );
+
+
+  fill.style.width = "0%";
+  percent.textContent = "0%";
+  logs.innerHTML = "";
+
+
+  const steps = [
+
+    ["Opening secure session...","blue"],
+    ["Verifying selected endpoint...","ok"],
+    ["Negotiating secure channel...","blue"],
+    ["Preparing mobile environment...","blue"],
+    ["Loading system interface...","blue"],
+    ["Preparing application layer...","blue"],
+    ["Session handshake complete.","ok"],
+    ["Access environment ready.","ok"]
+
+  ];
+
+
+  let index = 0;
+
+
+  const logTimer =
+    setInterval(()=>{
+
+      if(index < steps.length){
+
+        const line =
+          document.createElement("div");
+
+        line.className =
+          "logLine " +
+          steps[index][1];
+
+        line.textContent =
+          "> " +
+          steps[index][0];
+
+        logs.appendChild(line);
+
+        index++;
+
+      }else{
+
+        clearInterval(logTimer);
+
+      }
+
+    },520);
+
+
+  let progress = 0;
+
+
+  const progressTimer =
+    setInterval(()=>{
+
+      progress +=
+        Math.floor(Math.random()*8)+3;
+
+      if(progress >= 100){
+        progress = 100;
+      }
+
+
+      fill.style.width =
+        progress + "%";
+
+      percent.textContent =
+        progress + "%";
+
+
+      if(progress < 25){
+
+        text.textContent =
+          "Preparing session...";
+
+      }else if(progress < 50){
+
+        text.textContent =
+          "Establishing connection...";
+
+      }else if(progress < 75){
+
+        text.textContent =
+          "Loading mobile environment...";
+
+      }else if(progress < 100){
+
+        text.textContent =
+          "Finalizing access...";
+
+      }else{
+
+        text.textContent =
+          "Access ready.";
+
+      }
+
+
+      if(progress >= 100){
+
+        clearInterval(progressTimer);
+
+        setTimeout(()=>{
+          showScreen("screen6");
+        },800);
+
+      }
+
+    },240);
+
+}
+
+
+/* =========================================================
+   OPEN PHONE
+========================================================= */
+
+document
+  .getElementById("openPhone")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      showScreen("phoneScreen");
+
+      updatePhoneTime();
+
+    }
+  );
+
+
+/* =========================================================
+   PHONE BACK
+========================================================= */
+
+document
+  .getElementById("phoneBack")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      showScreen("screen6");
+
+    }
+  );
+
+
+/* =========================================================
+   PHONE TIME
+========================================================= */
+
+function updatePhoneTime(){
+
+  const now =
+    new Date();
+
+  let hour =
+    now.getHours();
+
+  let minute =
+    now.getMinutes();
+
+  if(minute < 10){
+    minute = "0" + minute;
+  }
+
+  document.getElementById(
+    "phoneTime"
+  ).textContent =
+    hour + ":" + minute;
+
+}
+
+setInterval(
+  updatePhoneTime,
+  30000
+);
+
+
+/* =========================================================
+   PHONE PAGES
+========================================================= */
+
+const pagesTrack =
+  document.getElementById(
+    "pagesTrack"
+  );
+
+const pagesViewport =
+  document.getElementById(
+    "pagesViewport"
+  );
+
+const dots =
+  document.querySelectorAll(
+    ".pageDot"
+  );
+
+
+let currentPage = 0;
+
+const totalPages = 4;
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+
+function setPhonePage(page){
+
+  if(page < 0){
+    page = 0;
+  }
+
+  if(page >= totalPages){
+    page = totalPages - 1;
+  }
+
+  currentPage = page;
+
+
+  pagesTrack.style.transform =
+    "translateX(-" +
+    (currentPage * 100) +
+    "%)";
+
+
+  dots.forEach(
+    (dot,index)=>{
+
+      dot.classList.toggle(
+        "active",
+        index === currentPage
+      );
+
+    }
+  );
+
+}
+
+
+/* Touch */
+
+pagesViewport.addEventListener(
+  "touchstart",
+  e=>{
+
+    const touch =
+      e.changedTouches[0];
+
+    touchStartX =
+      touch.screenX;
+
+    touchStartY =
+      touch.screenY;
+
+  },
+  {passive:true}
+);
+
+
+pagesViewport.addEventListener(
+  "touchend",
+  e=>{
+
+    const touch =
+      e.changedTouches[0];
+
+    touchEndX =
+      touch.screenX;
+
+    touchEndY =
+      touch.screenY;
+
+    handleSwipe();
+
+  },
+  {passive:true}
+);
+
+
+/* Mouse */
+
+let mouseDown = false;
+
+
+pagesViewport.addEventListener(
+  "mousedown",
+  e=>{
+
+    mouseDown = true;
+
+    touchStartX =
+      e.clientX;
+
+    touchStartY =
+      e.clientY;
+
+  }
+);
+
+
+pagesViewport.addEventListener(
+  "mouseup",
+  e=>{
+
+    if(!mouseDown){
+      return;
+    }
+
+    mouseDown = false;
+
+    touchEndX =
+      e.clientX;
+
+    touchEndY =
+      e.clientY;
+
+    handleSwipe();
+
+  }
+);
+
+
+function handleSwipe(){
+
+  const diffX =
+    touchEndX - touchStartX;
+
+  const diffY =
+    touchEndY - touchStartY;
+
+
+  if(Math.abs(diffX) < 45){
+    return;
+  }
+
+  if(Math.abs(diffX) <= Math.abs(diffY)){
+    return;
+  }
+
+
+  if(diffX < 0){
+
+    setPhonePage(
+      currentPage + 1
+    );
+
+  }else{
+
+    setPhonePage(
+      currentPage - 1
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   NOTIFICATION / CONTROL CENTER
+========================================================= */
+
+const notificationPanel =
+  document.getElementById(
+    "notificationPanel"
+  );
+
+const phone =
+  document.getElementById(
+    "phone"
+  );
+
+
+let topStartX = 0;
+let topStartY = 0;
+
+
+phone.addEventListener(
+  "touchstart",
+  e=>{
+
+    const touch =
+      e.changedTouches[0];
+
+    topStartX =
+      touch.screenX;
+
+    topStartY =
+      touch.screenY;
+
+  },
+  {passive:true}
+);
+
+
+phone.addEventListener(
+  "touchend",
+  e=>{
+
+    const touch =
+      e.changedTouches[0];
+
+    const endX =
+      touch.screenX;
+
+    const endY =
+      touch.screenY;
+
+
+    const diffY =
+      endY - topStartY;
+
+    const diffX =
+      endX - topStartX;
+
+
+    if(
+      topStartY < 100 &&
+      diffY > 55 &&
+      Math.abs(diffY) >
+      Math.abs(diffX)
+    ){
+
+      notificationPanel
+        .classList
+        .add("open");
+
+    }
+
+  },
+  {passive:true}
+);
+
+
+notificationPanel.addEventListener(
+  "click",
+  e=>{
+
+    if(e.target === notificationPanel){
+
+      notificationPanel
+        .classList
+        .remove("open");
+
+    }
+
+  }
+);
+
+
+document
+  .querySelectorAll(".quick")
+  .forEach(button=>{
+
+    button.addEventListener(
+      "click",
+      ()=>{
+
+        button.classList.toggle("on");
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   APPS
+========================================================= */
+
+const appView =
+  document.getElementById(
+    "appView"
+  );
+
+const appTitle =
+  document.getElementById(
+    "appTitle"
+  );
+
+const fakeAppTitle =
+  document.getElementById(
+    "fakeAppTitle"
+  );
+
+const fakeAppIcon =
+  document.getElementById(
+    "fakeAppIcon"
+  );
+
+const loadingLayer =
+  document.getElementById(
+    "loadingLayer"
+  );
+
+const errorLayer =
+  document.getElementById(
+    "errorLayer"
+  );
+
+const appLoadingFill =
+  document.getElementById(
+    "appLoadingFill"
+  );
+
+const loadingPercent =
+  document.getElementById(
+    "loadingPercent"
+  );
+
+const loadingTitle =
+  document.getElementById(
+    "loadingTitle"
+  );
+
+
+let currentApp = "";
+
+let appLoadingTimer = null;
+
+
+document
+  .querySelectorAll(".app")
+  .forEach(app=>{
+
+    app.addEventListener(
+      "click",
+      ()=>{
+
+        currentApp =
+          app.dataset.app;
+
+        openApplication(
+          currentApp
+        );
+
+      }
+    );
+
+  });
+
+
+function getShortIcon(name){
+
+  const icons = {
+
+    WhatsApp:"WA",
+    Instagram:"IG",
+    Snapchat:"SC",
+    TikTok:"TT",
+    X:"X",
+    Mail:"@",
+    Messages:"MSG",
+    Contacts:"CT",
+    Phone:"TEL",
+    Gallery:"GAL",
+    Photos:"PH",
+    Camera:"CAM",
+    Browser:"WEB",
+    Maps:"MAP",
+    Calendar:"CAL",
+    Clock:"CLK",
+    Calculator:"123",
+    Music:"♪",
+    Downloads:"↓",
+    Notes:"NT",
+    Files:"FIL",
+    Settings:"SET",
+    Recorder:"REC",
+    Documents:"DOC",
+    YouTube:"YT",
+    Gmail:"GM",
+    Drive:"DRV",
+    "Play Store":"PS",
+    Chrome:"CHR",
+    Meet:"MEET",
+    Translate:"TR",
+    Keep:"KP",
+    Google:"G",
+    News:"NEWS",
+    Weather:"WX",
+    Assistant:"AST",
+    Security:"SEC",
+    "Device Care":"CARE",
+    Share:"SHR",
+    Wallet:"WAL",
+    VPN:"VPN",
+    Terminal:">_",
+    Backup:"BKP",
+    "System UI":"SYS",
+    "App Manager":"APP",
+    "QR Scanner":"QR",
+    Compass:"CMP",
+    Torch:"LGT"
+
+  };
+
+  return icons[name] || "APP";
+
+}
+
+
+function openApplication(name){
+
+  notificationPanel
+    .classList
+    .remove("open");
+
+
+  appTitle.textContent =
+    name;
+
+  fakeAppTitle.textContent =
+    name;
+
+  fakeAppIcon.textContent =
+    getShortIcon(name);
+
+
+  appView
+    .classList
+    .add("open");
+
+
+  setTimeout(()=>{
+
+    startAppLoading(name);
+
+  },250);
+
+}
+
+
+/* =========================================================
+   15 SECOND APP LOADING
+========================================================= */
+
+function startAppLoading(name){
+
+  clearInterval(
+    appLoadingTimer
+  );
+
+
+  loadingLayer
+    .classList
+    .add("show");
+
+
+  loadingTitle.textContent =
+    "Opening " + name;
+
+
+  appLoadingFill.style.width =
+    "0%";
+
+  loadingPercent.textContent =
+    "0%";
+
+
+  let progress = 0;
+
+
+  appLoadingTimer =
+    setInterval(()=>{
+
+      progress += 1;
+
+
+      appLoadingFill.style.width =
+        progress + "%";
+
+      loadingPercent.textContent =
+        progress + "%";
+
+
+      if(progress >= 100){
+
+        clearInterval(
+          appLoadingTimer
+        );
+
+
+        setTimeout(()=>{
+
+          loadingLayer
+            .classList
+            .remove("show");
+
+          errorLayer
+            .classList
+            .add("show");
+
+        },350);
+
+      }
+
+    },150);
+
+}
+
+
+/* =========================================================
+   APP BACK
+========================================================= */
+
+document
+  .getElementById("appBack")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      clearInterval(
+        appLoadingTimer
+      );
+
+      loadingLayer
+        .classList
+        .remove("show");
+
+      errorLayer
+        .classList
+        .remove("show");
+
+      appView
+        .classList
+        .remove("open");
+
+    }
+  );
+
+
+/* =========================================================
+   ERROR BACK
+========================================================= */
+
+document
+  .getElementById("errorBack")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      errorLayer
+        .classList
+        .remove("show");
+
+      appView
+        .classList
+        .remove("open");
+
+    }
+  );
+
+
+/* =========================================================
+   TRY AGAIN
+========================================================= */
+
+document
+  .getElementById("tryAgain")
+  .addEventListener(
+    "click",
+    ()=>{
+
+      errorLayer
+        .classList
+        .remove("show");
+
+      startAppLoading(
+        currentApp
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   ESC
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key === "Escape"){
+
+      notificationPanel
+        .classList
+        .remove("open");
+
+      loadingLayer
+        .classList
+        .remove("show");
+
+      errorLayer
+        .classList
+        .remove("show");
+
+      appView
+        .classList
+        .remove("open");
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   INITIAL PHONE PAGE
+========================================================= */
+
+setPhonePage(0);
+
+</script>
+
+</body>
+</html>
